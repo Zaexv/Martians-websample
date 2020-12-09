@@ -21,4 +21,6 @@ from marcianos import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.nave_nodrizaList, name = 'naves_list'),
+    path(r'navenodriza/create$', views.nave_nodriza_create, name = 'naves_create'),
+    path(r'navenodriza/delete(?P<pk>\d+)$', views.nave_nodriza_delete, name ='naves_delete'),
 ]

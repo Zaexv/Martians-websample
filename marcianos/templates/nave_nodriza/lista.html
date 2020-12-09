@@ -8,10 +8,13 @@
   <body>
     <div class="container">
         <h1>Lista de todas las naves Nodrizas</h1>
+        <a class="btn btn-success" href='{% url "naves_create" %}'> Crear nave nodriza</a>
         <ul>
           {% for Nave in object_list %}
-            <li><p>Nave PK: {{ Nave.pk }}</p>
-            <p>Nombre: {{ Nave.nombre }}</p>
+            <li>
+              <p>Nave PK: {{ Nave.pk }}</p>
+              <p>Nombre: {{ Nave.nombre }}</p>
+              <a class="btn btn-danger" href='{% url "naves_delete" Nave.pk %}'>Delete</a>
             </li>
           {% endfor %}
         </ul>
