@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from marcianos.models import nave_nodriza
+from marcianos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.nave_nodrizaList, name = 'naves_list'),
 ]
