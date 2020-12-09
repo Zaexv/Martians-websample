@@ -9,6 +9,12 @@ class nave_nodrizaForm(ModelForm):
         model = nave_nodriza
         fields = ['nombre']
 
+class aeronaveForm(ModelForm):
+    class Meta:
+        model = nave_nodriza
+        fields = ['nombre', 'max_marcianos', 'nave_origen', 'nave_destino']
+
+
 def nave_nodrizaList(request, template_name = 'nave_nodriza/lista.html'):
     naves_nodrizas = nave_nodriza.objects.all() #Obtengo la lista de naves
     data = {}
