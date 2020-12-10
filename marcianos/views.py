@@ -30,8 +30,8 @@ def nave_nodriza_create(request, template_name='nave_nodriza/crear_nave.html'):
     return render(request, template_name, {'form': form})
 
 def nave_nodriza_delete(request, pk, template_name='nave_nodriza/borrar_nave.html'):
-    post = get_object_or_404(nave_nodriza, pk=pk)
+    nave = get_object_or_404(nave_nodriza, pk=pk)
     if request.method=='POST':
-        post.delete()
+        nave.delete()
         return redirect('naves_list')
-    return render(request, template_name, {'object': post})
+    return render(request, template_name, {'object': nave})
