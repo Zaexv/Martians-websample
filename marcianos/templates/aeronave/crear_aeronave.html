@@ -7,11 +7,11 @@
   </head>
   <body>
     <div class="container">
-          <h1>Crear nueva nave nodriza</h1>
+          <h1>Crear nueva aeronave</h1>
       <form  method="post">{% csrf_token %}
         {{ form.as_p }}
         <input class="btn btn-primary" type="submit" value="Enviar" />
-        <a class="btn btn-danger" href='{% url "naves_list" %}'>Cancelar</a>
+        <a class="btn btn-danger" href='{% url "aeronaves_list" %}'>Cancelar</a>
       </form>
     </div>
   </body>

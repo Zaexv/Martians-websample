@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <title>Django CRUD application!</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Lista de todas las AeroNaves</h1>
+        <a class="btn btn-success" href='{% url "aeronave_create" %}'> Crear aeronave nodriza</a>
+        <ul>
+          {% for AeroNave in object_list %}
+            <li>
+              <p>AeroNave PK: {{ AeroNave.pk }}</p>
+              <p>Nombre: {{ AeroNave.nombre }}</p>
+              <p>Max Marcianos: {{ AeroNave.max_marcianos}} </p>
+              <p>Nave de Origen: {{ AeroNave.nave_origen.nombre }} </p>
+              <p>Nave de Destino: {{ AeroNave.nave_destino.nombre }} </p>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+  </body>
+</html>
