@@ -7,7 +7,9 @@ from marcianos.models import nave_nodriza, aeronave
 class nave_nodrizaForm(ModelForm):
     class Meta:
         model = nave_nodriza
-        fields = ['nombre']
+        fields = [
+        'nombre',
+        ]
 
 def nave_nodrizaList(request, template_name = 'nave_nodriza/lista.html'):
     naves_nodrizas = nave_nodriza.objects.all() #Obtengo la lista de naves
@@ -30,7 +32,7 @@ def nave_nodriza_delete(request, pk, template_name='nave_nodriza/borrar_nave.htm
         return redirect('naves_list')
     return render(request, template_name, {'object': nave})
 
-#Aeronaves
+# Aeronaves
 class aeronaveForm(ModelForm):
     class Meta:
         model = aeronave
@@ -53,3 +55,10 @@ def aeronave_create(request, template_name='aeronave/crear_aeronave.html'):
         form.save()
         return redirect('aeronaves_list')
     return render(request, template_name, {'form': form})
+
+def aeronave_delete(request, pk, template_name='aeronave/borrar_aeronave.html'):
+    aero_nave = get_object_or_404(aeronave, pk=pk)
+    if request.method=='POST':
+        aero_nave.delete()
+        return redirect('aeronaves_list')
+    return render(request, template_name, {'object': aero_nave})

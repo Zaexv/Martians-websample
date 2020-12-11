@@ -17,6 +17,7 @@
               <p>Max Marcianos: {{ AeroNave.max_marcianos}} </p>
               <p>Nave de Origen: {{ AeroNave.nave_origen.nombre }} </p>
               <p>Nave de Destino: {{ AeroNave.nave_destino.nombre }} </p>
+              <a class="btn btn-danger" href='{% url "aeronave_delete" AeroNave.pk %}'>Borrar</a>
             </li>
           {% endfor %}
         </ul>
