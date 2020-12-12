@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <title>Pasajeros</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Lista de todos los Pasajeros</h1>
+        <a class="btn btn-success" href='{% url "pasajero_create" %}'> Crear Pasajero</a>
+        <table>
+            <tr>
+                <td>ID Pasajero</td>
+                <td>Nombre</td>
+                <td>A bordo de </td>
+            </tr>
+                {% for Pasajero in object_list %}
+                <tr>
+                    <td>{{ Pasajero.pk }}</td>
+                    <td>{{ Pasajero.nombre }}</td>
+                    <td>{{ Pasajero.aeronave_id.nombre }}</td>
+                    <td>
+                        <a class="btn btn-primary" href='{% url "pasajero_update" Pasajero.pk %}'>Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <ul>
+          {% for Pasajero in object_list %}
+            <li>
+              <p>ID Pasajero: {{ Pasajero.pk }}</p>
+              <p>Nombre: {{ Pasajero.nombre }}</p>
+                <a class="btn btn-danger" href='{% url "pasajero_delete" Pasajero.pk %}'>Borrar</a>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+  </body>
+</html>

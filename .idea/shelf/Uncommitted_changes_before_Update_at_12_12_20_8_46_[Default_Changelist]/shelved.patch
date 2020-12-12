@@ -1,0 +1,268 @@
+Index: marcianosISI/urls.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"marcianosISI URL Configuration\n\nThe `urlpatterns` list routes URLs to views. For more information please see:\n    https://docs.djangoproject.com/en/3.1/topics/http/urls/\nExamples:\nFunction views\n    1. Add an import:  from my_app import views\n    2. Add a URL to urlpatterns:  path('', views.home, name='home')\nClass-based views\n    1. Add an import:  from other_app.views import Home\n    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')\nIncluding another URLconf\n    1. Import the include() function: from django.urls import include, path\n    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))\n\"\"\"\nfrom django.contrib import admin\nfrom django.urls import path\nfrom marcianos.models import nave_nodriza\nfrom marcianos import views\n\nurlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', views.nave_nodrizaList, name = 'naves_list'),\n    path(r'navenodriza/create$', views.nave_nodriza_create, name = 'naves_create'),\n    path(r'navenodriza/delete(?P<pk>\\d+)$', views.nave_nodriza_delete, name ='naves_delete'),\n]\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/marcianosISI/urls.py b/marcianosISI/urls.py
+--- a/marcianosISI/urls.py	(revision 498129c77e4316967c5cdbd480eb582e016ece59)
++++ b/marcianosISI/urls.py	(date 1607709130929)
+@@ -23,4 +23,6 @@
+     path('', views.nave_nodrizaList, name = 'naves_list'),
+     path(r'navenodriza/create$', views.nave_nodriza_create, name = 'naves_create'),
+     path(r'navenodriza/delete(?P<pk>\d+)$', views.nave_nodriza_delete, name ='naves_delete'),
++    path(r'pasajero/create$', views.pasajero_create, name='pasajeros_create'),
++    path(r'pasajero/list', views.pasajero_create, name='pasajeros_list'),
+ ]
+Index: marcianos/models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.db import models\n\n\nclass nave_nodriza(models.Model):\n    nombre = models.CharField(max_length=400)\n\nclass aeronave(models.Model):\n    nombre = models.CharField(max_length=400)\n    max_marcianos = models.IntegerField()\n    nave_origen = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,\n        related_name = 'nave_origen', null=True)\n    nave_destino = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,\n        related_name = 'nave_destino', null=True)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/marcianos/models.py b/marcianos/models.py
+--- a/marcianos/models.py	(revision 498129c77e4316967c5cdbd480eb582e016ece59)
++++ b/marcianos/models.py	(date 1607708482622)
+@@ -11,3 +11,8 @@
+         related_name = 'nave_origen', null=True)
+     nave_destino = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,
+         related_name = 'nave_destino', null=True)
++
++class Pasajero(models.Model):
++    nombre = models.CharField(max_length=400)
++    aeronave_id = models.ForeignKey(aeronave, on_delete=models.CASCADE,
++        related_name = 'subido_en', null=True)
+Index: marcianos/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.shortcuts import render, redirect, get_object_or_404\nfrom django.forms import ModelForm\n\nfrom marcianos.models import nave_nodriza\n\n# Create your views here.\nclass nave_nodrizaForm(ModelForm):\n    class Meta:\n        model = nave_nodriza\n        fields = ['nombre']\n\nclass aeronaveForm(ModelForm):\n    class Meta:\n        model = nave_nodriza\n        fields = ['nombre', 'max_marcianos', 'nave_origen', 'nave_destino']\n\n\ndef nave_nodrizaList(request, template_name = 'nave_nodriza/lista.html'):\n    naves_nodrizas = nave_nodriza.objects.all() #Obtengo la lista de naves\n    data = {}\n    data['object_list'] = naves_nodrizas #Devuelvo los objetos que voy a pintar\n    return render(request, template_name, data)\n\n\ndef nave_nodriza_create(request, template_name='nave_nodriza/crear_nave.html'):\n    form = nave_nodrizaForm(request.POST or None)\n    if form.is_valid():\n        form.save()\n        return redirect('naves_list')\n    return render(request, template_name, {'form': form})\n\ndef nave_nodriza_delete(request, pk, template_name='nave_nodriza/borrar_nave.html'):\n    nave = get_object_or_404(nave_nodriza, pk=pk)\n    if request.method=='POST':\n        nave.delete()\n        return redirect('naves_list')\n    return render(request, template_name, {'object': nave})\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/marcianos/views.py b/marcianos/views.py
+--- a/marcianos/views.py	(revision 498129c77e4316967c5cdbd480eb582e016ece59)
++++ b/marcianos/views.py	(date 1607710012985)
+@@ -1,7 +1,7 @@
+ from django.shortcuts import render, redirect, get_object_or_404
+ from django.forms import ModelForm
+ 
+-from marcianos.models import nave_nodriza
++from marcianos.models import nave_nodriza, aeronave, Pasajero
+ 
+ # Create your views here.
+ class nave_nodrizaForm(ModelForm):
+@@ -11,9 +11,14 @@
+ 
+ class aeronaveForm(ModelForm):
+     class Meta:
+-        model = nave_nodriza
++        model = aeronave
+         fields = ['nombre', 'max_marcianos', 'nave_origen', 'nave_destino']
+ 
++class PasajeroForm(ModelForm):
++    class Meta:
++        model = Pasajero
++        fields = ['nombre']
++
+ 
+ def nave_nodrizaList(request, template_name = 'nave_nodriza/lista.html'):
+     naves_nodrizas = nave_nodriza.objects.all() #Obtengo la lista de naves
+@@ -35,3 +40,16 @@
+         nave.delete()
+         return redirect('naves_list')
+     return render(request, template_name, {'object': nave})
++
++def pasajero_create(request, template_name = 'pasajero/crear_pasajero.html') :
++    form = PasajeroForm(request.POST or None)
++    if form.is_valid():
++        form.save()
++        return redirect('pasajeros_list')
++    return render(request, template_name, {'form': form})
++
++def pasajero_list(request, template_name = 'nave_nodriza/lista.html'):
++    pasajeros = Pasajero.objects.all() #Obtengo la lista de naves
++    data = {}
++    data['object_list'] = pasajeros #Devuelvo los objetos que voy a pintar
++    return render(request, template_name, data)
+Index: marcianos/templates/nave_nodriza/lista.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"utf-8\">\n    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css\">\n    <title>Django CRUD application!</title>\n  </head>\n  <body>\n    <div class=\"container\">\n        <h1>Lista de todas las naves Nodrizas</h1>\n        <a class=\"btn btn-success\" href='{% url \"naves_create\" %}'> Crear nave nodriza</a>\n        <ul>\n          {% for Nave in object_list %}\n            <li>\n              <p>Nave PK: {{ Nave.pk }}</p>\n              <p>Nombre: {{ Nave.nombre }}</p>\n              <a class=\"btn btn-danger\" href='{% url \"naves_delete\" Nave.pk %}'>Delete</a>\n            </li>\n          {% endfor %}\n        </ul>\n    </div>\n  </body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/marcianos/templates/nave_nodriza/lista.html b/marcianos/templates/nave_nodriza/lista.html
+--- a/marcianos/templates/nave_nodriza/lista.html	(revision 498129c77e4316967c5cdbd480eb582e016ece59)
++++ b/marcianos/templates/nave_nodriza/lista.html	(date 1607710179058)
+@@ -18,6 +18,9 @@
+             </li>
+           {% endfor %}
+         </ul>
++        <div>
++            <a class="btn btn-success" href='{% url "pasajeros_list" %}'> Mostrar pasajeros</a>
++        </div>
+     </div>
+   </body>
+ </html>
+Index: .idea/marcianosISI.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/marcianosISI.iml b/.idea/marcianosISI.iml
+new file mode 100644
+--- /dev/null	(date 1607535090876)
++++ b/.idea/marcianosISI.iml	(date 1607535090876)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1607535090944)
++++ b/.idea/modules.xml	(date 1607535090944)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/marcianosISI.iml" filepath="$PROJECT_DIR$/.idea/marcianosISI.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1607708038170)
++++ b/.idea/misc.xml	(date 1607708038170)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
++  <component name="PyCharmProfessionalAdvertiser">
++    <option name="shown" value="true" />
++  </component>
++</project>
+\ No newline at end of file
+Index: marcianos/migrations/0006_pasajero.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/marcianos/migrations/0006_pasajero.py b/marcianos/migrations/0006_pasajero.py
+new file mode 100644
+--- /dev/null	(date 1607710018449)
++++ b/marcianos/migrations/0006_pasajero.py	(date 1607710018449)
+@@ -0,0 +1,22 @@
++# Generated by Django 3.1.3 on 2020-12-11 18:06
++
++from django.db import migrations, models
++import django.db.models.deletion
++
++
++class Migration(migrations.Migration):
++
++    dependencies = [
++        ('marcianos', '0005_auto_20201209_2200'),
++    ]
++
++    operations = [
++        migrations.CreateModel(
++            name='Pasajero',
++            fields=[
++                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
++                ('nombre', models.CharField(max_length=400)),
++                ('aeronave_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='subido_en', to='marcianos.aeronave')),
++            ],
++        ),
++    ]
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/profiles_settings.xml b/.idea/inspectionProfiles/profiles_settings.xml
+new file mode 100644
+--- /dev/null	(date 1607535091048)
++++ b/.idea/inspectionProfiles/profiles_settings.xml	(date 1607535091048)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: marcianos/templates/pasajero/crear_pasajero.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/marcianos/templates/pasajero/crear_pasajero.html b/marcianos/templates/pasajero/crear_pasajero.html
+new file mode 100644
+--- /dev/null	(date 1607710294324)
++++ b/marcianos/templates/pasajero/crear_pasajero.html	(date 1607710294324)
+@@ -0,0 +1,15 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <meta charset="utf-8">
++    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
++    <title>Django CRUD application!</title>
++  </head>
++  <body>
++    <div class="container">
++        <h1>Lista de todos los Pasajeros</h1>
++        <a class="btn btn-success" href='{% url "naves_create" %}'> Crear Pasajero</a>
++
++    </div>
++  </body>
++</html>
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1607535091088)
++++ b/.idea/vcs.xml	(date 1607535091088)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1607535091548)
++++ b/.idea/.gitignore	(date 1607535091548)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
