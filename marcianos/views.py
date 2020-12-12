@@ -34,6 +34,13 @@ def nave_nodriza_delete(request, pk, template_name='nave_nodriza/borrar_nave.htm
 
 # Aeronaves
 class aeronaveForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(aeronaveForm, self).__init__(*args, **kwargs)
+        self.fields['nave_origen'].queryset = nave_nodriza.objects.all()
+        self.fields['nave_origen'].label_from_instance = lambda obj: "%s" % (obj.nombre)
+        self.fields['nave_destino'].queryset = nave_nodriza.objects.all()
+        self.fields['nave_destino'].label_from_instance = lambda obj: "%s" % (obj.nombre)
+
     class Meta:
         model = aeronave
         fields = [
@@ -66,6 +73,12 @@ def aeronave_delete(request, pk, template_name='aeronave/borrar_aeronave.html'):
 # Pasajeros
 
 class PasajeroForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(PasajeroForm, self).__init__(*args, **kwargs)
+        self.fields['aeronave_id'].queryset = aeronave.objects.all()
+        self.fields['aeronave_id'].label_from_instance = lambda obj: "%s" % (obj.nombre)
+
     class Meta:
         model = Pasajero
         fields = [
