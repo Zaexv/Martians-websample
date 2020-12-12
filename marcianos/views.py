@@ -68,7 +68,10 @@ def aeronave_delete(request, pk, template_name='aeronave/borrar_aeronave.html'):
 class PasajeroForm(ModelForm):
     class Meta:
         model = Pasajero
-        fields = ['nombre']
+        fields = [
+            'nombre',
+            'aeronave_id',
+        ]
 
 
 def pasajero_list(request, template_name = 'pasajero/lista.html'):
@@ -90,3 +93,11 @@ def pasajero_delete(request, pk, template_name='pasajero/borrar_pasajero.html'):
         pasajero.delete()
         return redirect('pasajero_list')
     return render(request, template_name, {'object': pasajero})
+
+def pasajero_update(request, pk, template_name='pasajero/crear_pasajero.html'):
+    pasajero = get_object_or_404(Pasajero, pk=pk)
+    form = PasajeroForm(request.POST or None, instance=pasajero)
+    if form.is_valid():
+        form.save()
+        return redirect('pasajero_list')
+    return render(request, template_name, {'form': form})

@@ -9,6 +9,24 @@
     <div class="container">
         <h1>Lista de todos los Pasajeros</h1>
         <a class="btn btn-success" href='{% url "pasajero_create" %}'> Crear Pasajero</a>
+        <table>
+            <tr>
+                <td>ID Pasajero</td>
+                <td>Nombre</td>
+                <td>A bordo de </td>
+            </tr>
+                {% for Pasajero in object_list %}
+                <tr>
+                    <td>{{ Pasajero.pk }}</td>
+                    <td>{{ Pasajero.nombre }}</td>
+                    <td>{{ Pasajero.aeronave_id.nombre }}</td>
+                    <td>
+                        <a class="btn btn-primary" href='{% url "pasajero_update" Pasajero.pk %}'>Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
         <ul>
           {% for Pasajero in object_list %}
             <li>
