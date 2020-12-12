@@ -50,13 +50,24 @@ class aeronaveForm(ModelForm):
          'nave_destino'
          ]
 
+def mostrar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
+    pasajeros = Pasajero.objects.all().filter(aeronave_id=pk)
+    data = {}
+    data['object_list'] = pasajeros
+    return render(request, template_name, data)
+
+def asignar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
+    pass
+    # To DO
+
+
 def aeronaveList(request, template_name = 'aeronave/lista.html'):
     aeronaves = aeronave.objects.all() #Obtengo la lista de naves
     data = {}
     data['object_list'] = aeronaves #Devuelvo los objetos que voy a pintar
     return render(request, template_name, data)
 
-def aeronave_create(request, template_name='aeronave/crear_aeronave.html'):
+def aeronave_create(request, template_name = 'aeronave/crear_aeronave.html'):
     form = aeronaveForm(request.POST or None)
     if form.is_valid():
         form.save()
