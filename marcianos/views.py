@@ -83,3 +83,10 @@ def pasajero_create(request, template_name='pasajero/crear_pasajero.html'):
         form.save()
         return redirect('pasajero_list')
     return render(request, template_name, {'form': form})
+
+def pasajero_delete(request, pk, template_name='pasajero/borrar_pasajero.html'):
+    pasajero = get_object_or_404(Pasajero, pk=pk)
+    if request.method=='POST':
+        pasajero.delete()
+        return redirect('pasajero_list')
+    return render(request, template_name, {'object': pasajero})
