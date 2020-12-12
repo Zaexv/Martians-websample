@@ -17,7 +17,7 @@ class aeronaveForm(ModelForm):
 class PasajeroForm(ModelForm):
     class Meta:
         model = Pasajero
-        fields = ['nombre', 'aeronave_id']
+        fields = ['nombre']
 
 
 def nave_nodrizaList(request, template_name = 'nave_nodriza/lista.html'):
@@ -41,14 +41,14 @@ def nave_nodriza_delete(request, pk, template_name='nave_nodriza/borrar_nave.htm
         return redirect('naves_list')
     return render(request, template_name, {'object': nave})
 
-def pasajero_list(request, template_name = 'pasajero/lista_pasajeros.html'):
+def pasajero_list(request, template_name = 'pasajero/lista_pasajero.html'):
     pasajeros = Pasajero.objects.all()
     data = {}
     data['object_list'] = pasajeros
     return render(request, template_name, data)
 
 
-def pasajero_create(request, template_name='nave_nodriza/crear_pasajero.html'):
+def pasajero_create(request, template_name='pasajero/crear_pasajero.html'):
     form = PasajeroForm(request.POST or None)
     if form.is_valid():
         form.save()
