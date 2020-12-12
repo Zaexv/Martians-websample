@@ -56,9 +56,10 @@ def mostrar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
     data['object_list'] = pasajeros
     return render(request, template_name, data)
 
-def asignar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
-    pass
-    # To DO
+def asignar_pasajeros(request, pk, template_name = 'work_in_progress.html'):
+    data = {}
+    return render(request, template_name, data)
+
 
 
 def aeronaveList(request, template_name = 'aeronave/lista.html'):

@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[UPD]: Los selectores de claves ajenas ahora tienen el nombre del objeto. no el ID (Tanto para Pasajeros como aeronaves)">
+    <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[ADD]: Ver pasajeros de una Aeronave">
+      <change afterPath="$PROJECT_DIR$/marcianos/templates/work_in_progress.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marcianos/templates/aeronave/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/templates/aeronave/lista.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marcianos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marcianosISI/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianosISI/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +35,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/marcianos/templates/aeronave" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/marcianos/templates" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/marcianos/templates" />
       <recent name="$PROJECT_DIR$/marcianos/templates/aeronave" />
       <recent name="$PROJECT_DIR$/marcianos/templates/pasajero" />
     </key>
@@ -103,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607797576908</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="[ADD]: Ver pasajeros de una Aeronave">
+      <created>1607798258080</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1607798258080</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +144,7 @@
     <MESSAGE value="[ADD]: Delete Pasajeros" />
     <MESSAGE value="[ADD]: Update de pasajeros&#10;[UPD]: El aeronave_id en el create es opcional. Un paajero puede no tener aeronave." />
     <MESSAGE value="[UPD]: Los selectores de claves ajenas ahora tienen el nombre del objeto. no el ID (Tanto para Pasajeros como aeronaves)" />
-    <option name="LAST_COMMIT_MESSAGE" value="[UPD]: Los selectores de claves ajenas ahora tienen el nombre del objeto. no el ID (Tanto para Pasajeros como aeronaves)" />
+    <MESSAGE value="[ADD]: Ver pasajeros de una Aeronave" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD]: Ver pasajeros de una Aeronave" />
   </component>
 </project>
