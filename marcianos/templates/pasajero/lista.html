@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <title>Pasajeros</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Lista de todos los Pasajeros</h1>
+        <a class="btn btn-success" href='{% url "pasajero_create" %}'> Crear Pasajero</a>
+        <ul>
+          {% for Pasajero in object_list %}
+            <li>
+              <p>ID Pasajero: {{ Pasajero.pk }}</p>
+              <p>Nombre: {{ Pasajero.nombre }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+  </body>
+</html>

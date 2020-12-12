@@ -27,4 +27,6 @@ urlpatterns = [
     path('aeronave/', views.aeronaveList, name = 'aeronaves_list'),
     path(r'aeronave/create$', views.aeronave_create, name = 'aeronave_create'),
     path(r'aeronave/delete(?P<pk>\d+)$', views.aeronave_delete, name ='aeronave_delete'),
+    path(r'pasajero/create$', views.pasajero_create, name='pasajero_create'),
+    path(r'pasajero/list', views.pasajero_list, name='pasajero_list'),
 ]

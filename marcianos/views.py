@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 
-from marcianos.models import nave_nodriza, aeronave
+from marcianos.models import nave_nodriza, aeronave, Pasajero
 
 # Naves Nodrizas
 class nave_nodrizaForm(ModelForm):
@@ -62,3 +62,24 @@ def aeronave_delete(request, pk, template_name='aeronave/borrar_aeronave.html'):
         aero_nave.delete()
         return redirect('aeronaves_list')
     return render(request, template_name, {'object': aero_nave})
+
+# Pasajeros
+
+class PasajeroForm(ModelForm):
+    class Meta:
+        model = Pasajero
+        fields = ['nombre']
+
+
+def pasajero_list(request, template_name = 'pasajero/lista.html'):
+    pasajeros = Pasajero.objects.all()
+    data = {}
+    data['object_list'] = pasajeros
+    return render(request, template_name, data)
+
+def pasajero_create(request, template_name='pasajero/crear_pasajero.html'):
+    form = PasajeroForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('pasajero_list')
+    return render(request, template_name, {'form': form})

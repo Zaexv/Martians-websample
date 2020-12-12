@@ -11,3 +11,8 @@ class aeronave(models.Model):
         related_name = 'nave_origen', null=True)
     nave_destino = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,
         related_name = 'nave_destino', null=True)
+
+class Pasajero(models.Model):
+    nombre = models.CharField(max_length=400)
+    aeronave_id = models.ForeignKey(aeronave, on_delete=models.CASCADE,
+        related_name = 'subido_en', null=True)
