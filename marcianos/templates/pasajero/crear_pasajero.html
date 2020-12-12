@@ -3,13 +3,16 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <title>Django CRUD application!</title>
+    <title>Crear Pasajeros</title>
   </head>
   <body>
     <div class="container">
-        <h1>Lista de todos los Pasajeros</h1>
-        <a class="btn btn-success" href='{% url "naves_create" %}'> Crear Pasajero</a>
-
+          <h1>Crear un Pasajero</h1>
+      <form  method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Enviar" />
+        <a class="btn btn-danger" href='{% url "pasajeros_list" %}'>Cancelar</a>
+      </form>
     </div>
   </body>
 </html>

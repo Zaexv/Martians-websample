@@ -23,4 +23,6 @@ urlpatterns = [
     path('', views.nave_nodrizaList, name = 'naves_list'),
     path(r'navenodriza/create$', views.nave_nodriza_create, name = 'naves_create'),
     path(r'navenodriza/delete(?P<pk>\d+)$', views.nave_nodriza_delete, name ='naves_delete'),
+    path(r'pasajero/create$', views.pasajero_create, name='pasajeros_create'),
+    path(r'pasajero/list', views.pasajero_list, name='pasajeros_list'),
 ]
