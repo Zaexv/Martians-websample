@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[ADD]: Ver pasajeros de una Aeronave">
-      <change afterPath="$PROJECT_DIR$/marcianos/templates/work_in_progress.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marcianos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marcianos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +125,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="pasajeros" />
+                        <option value="LinkPasajeroAeronave" />
                       </list>
                     </value>
                   </entry>

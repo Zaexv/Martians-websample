@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
+from django.db.models import CheckConstraint, Q, F
 
 from marcianos.models import nave_nodriza, aeronave, Pasajero
 
@@ -50,16 +51,18 @@ class aeronaveForm(ModelForm):
          'nave_destino'
          ]
 
+
 def mostrar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
     pasajeros = Pasajero.objects.all().filter(aeronave_id=pk)
     data = {}
     data['object_list'] = pasajeros
     return render(request, template_name, data)
 
-def asignar_pasajeros(request, pk, template_name = 'work_in_progress.html'):
+def asignar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
+    pasajeros = Pasajero.objects.all().exclude(aeronave_id=pk).filter(aeronave_id=None)
     data = {}
+    data['object_list'] = pasajeros
     return render(request, template_name, data)
-
 
 
 def aeronaveList(request, template_name = 'aeronave/lista.html'):
