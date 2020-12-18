@@ -9,20 +9,34 @@
     <div class="container">
         <h1>Lista de todas las AeroNaves</h1>
         <a class="btn btn-success" href='{% url "aeronave_create" %}'> Crear aeronave nodriza</a>
-        <ul>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Max Marcianos</th>
+              <th scope="col">Nave Origen</th>
+              <th scope="col">Nave Destino</th>
+              <th scope="col">Ver pasajeros</th>
+              <th scope="col">Asignar Pasajeros</th>
+              <th scope="col">Borrar aeronave</th>
+            </tr>
+          </thead>
+          <tbody>
           {% for AeroNave in object_list %}
-            <li>
-              <p>AeroNave PK: {{ AeroNave.pk }}</p>
-              <p>Nombre: {{ AeroNave.nombre }}</p>
-              <p>Max Marcianos: {{ AeroNave.max_marcianos}} </p>
-              <p>Nave de Origen: {{ AeroNave.nave_origen.nombre }} </p>
-              <p>Nave de Destino: {{ AeroNave.nave_destino.nombre }} </p>
-              <a class="btn btn-info" href='{% url "mostrar_pasajeros" AeroNave.pk %}'>Ver Pasajeros</a>
-              <a class="btn btn-warning" href='{% url "asignar_pasajeros" AeroNave.pk %}'>Asignar Pasajeros</a>
-              <a class="btn btn-danger" href='{% url "aeronave_delete" AeroNave.pk %}'>Borrar</a>
-            </li>
-          {% endfor %}
-        </ul>
+              <tr>
+                <th>{{ AeroNave.pk }}</th>
+                <td>{{ AeroNave.nombre }}</td>
+                <td>{{ AeroNave.max_marcianos}} </td>
+                <td>{{ AeroNave.nave_origen.nombre }} </td>
+                <td>{{ AeroNave.nave_destino.nombre }} </td>
+                <td class="btn btn-info" href='{% url "mostrar_pasajeros" AeroNave.pk %}'>Ver Pasajeros</td>
+                <td><a class="btn btn-warning" href='{% url "asignar_pasajeros" AeroNave.pk %}'>Asignar Pasajeros</a></td>
+                <td><a class="btn btn-danger" href='{% url "aeronave_delete" AeroNave.pk %}'>Borrar</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
     </div>
   </body>
 </html>
