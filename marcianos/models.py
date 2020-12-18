@@ -11,6 +11,7 @@ class aeronave(models.Model):
         related_name = 'nave_origen', null=True)
     nave_destino = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,
         related_name = 'nave_destino', null=True)
+    full = models.BooleanField(default=False)
 
 class Pasajero(models.Model):
     nombre = models.CharField(max_length=400)

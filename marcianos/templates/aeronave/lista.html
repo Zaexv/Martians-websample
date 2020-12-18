@@ -30,8 +30,12 @@
                 <td>{{ AeroNave.max_marcianos}} </td>
                 <td>{{ AeroNave.nave_origen.nombre }} </td>
                 <td>{{ AeroNave.nave_destino.nombre }} </td>
-                <td class="btn btn-info" href='{% url "mostrar_pasajeros" AeroNave.pk %}'>Ver Pasajeros</td>
-                <td><a class="btn btn-warning" href='{% url "asignar_pasajeros" AeroNave.pk %}'>Asignar Pasajeros</a></td>
+                <td><a class="btn btn-info" href='{% url "mostrar_pasajeros" AeroNave.pk %}'>Ver Pasajeros</a></td>
+                {% if AeroNave.full %}
+                  <td><a class="btn btn-warning disabled" href='{% url "asignar_pasajeros" AeroNave.pk %}'>Asignar Pasajeros</a></td>
+                {% else %}
+                  <td><a class="btn btn-warning" href='{% url "asignar_pasajeros" AeroNave.pk %}'>Asignar Pasajeros</a></td>
+                {% endif %}
                 <td><a class="btn btn-danger" href='{% url "aeronave_delete" AeroNave.pk %}'>Borrar</a></td>
               </tr>
             {% endfor %}
