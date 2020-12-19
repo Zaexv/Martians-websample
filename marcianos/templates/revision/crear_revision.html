@@ -7,6 +7,7 @@
   </head>
   <body>
     <div class="container">
+      {% include "home.html" %}
           <h1>Crear una Revisión</h1>
       <form  method="post">{% csrf_token %}
         {{ form.as_p }}
