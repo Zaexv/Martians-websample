@@ -12,6 +12,10 @@ class aeronave(models.Model):
     nave_destino = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,
         related_name = 'nave_destino', null=True)
 
+    def comprobar_max_pasajeros(self):
+        return Pasajero.objects.filter(aeronave_id__pk=self.pk).count() > self.max_marcianos
+
+
 class Pasajero(models.Model):
     nombre = models.CharField(max_length=400)
     aeronave_id = models.ForeignKey(aeronave, on_delete=models.CASCADE,
