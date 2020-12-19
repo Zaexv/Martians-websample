@@ -11,11 +11,16 @@ class aeronave(models.Model):
         related_name = 'nave_origen', null=True)
     nave_destino = models.ForeignKey(nave_nodriza, on_delete=models.CASCADE,
         related_name = 'nave_destino', null=True)
-    full = models.BooleanField(default=False)
+
+    def marcianos_count(self):
+        pasajeros = Pasajero.objects.all().filter(aeronave_id=self.pk).count()
+        self.marcianos_count = pasajeros
+        return pasajeros
+
 
 class Pasajero(models.Model):
     nombre = models.CharField(max_length=400)
-    aeronave_id = models.ForeignKey(aeronave, on_delete=models.CASCADE,
+    aeronave_id = models.ForeignKey(aeronave, on_delete=models.SET_NULL,
         related_name = 'subido_en', null=True, blank=True)
 
 class Revision(models.Model):

@@ -58,12 +58,25 @@ def mostrar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
     data['object_list'] = pasajeros
     return render(request, template_name, data)
 
-def asignar_pasajeros(request, pk, template_name = 'pasajero/lista.html'):
+def pasajeros_sin_nave(request, pk, template_name = 'pasajero/asignar.html'):
     pasajeros = Pasajero.objects.all().exclude(aeronave_id=pk).filter(aeronave_id=None)
+    aero = aeronave.objects.get(pk=pk)
     data = {}
     data['object_list'] = pasajeros
+    data['object_aeronave'] = aero
     return render(request, template_name, data)
 
+def asignar_pasajeros(request, pkP, pkA, template_name = 'pasajero/exito.html'):
+    pasajero = Pasajero.objects.get(pk=pkP)
+    aero = aeronave.objects.get(pk=pkA)
+    count_marcianos = Pasajero.objects.all().filter(aeronave_id=pkA).count()
+    if count_marcianos >= aero.max_marcianos:
+        # No se puede asignar.
+        return redirect('error')
+    else:
+        pasajero.aeronave_id = aero
+        pasajero.save()
+        return redirect('exito')
 
 def aeronaveList(request, template_name = 'aeronave/lista.html'):
     aeronaves = aeronave.objects.all() #Obtengo la lista de naves
@@ -129,3 +142,10 @@ def pasajero_update(request, pk, template_name='pasajero/crear_pasajero.html'):
         form.save()
         return redirect('pasajero_list')
     return render(request, template_name, {'form': form})
+
+
+def error(request, template_name='error.html'):
+    return render(request, template_name, {})
+
+def exito(request, template_name='exito.html'):
+    return render(request, template_name, {})

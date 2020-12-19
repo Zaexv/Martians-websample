@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <title>Pasajeros</title>
+  </head>
+  <body>
+  <div class="container">
+        <h1>Lista de todos los Pasajeros de {{ object_aeronave.nombre }}</h1>
+        <a class="btn btn-success" href='{% url "pasajero_create" %}'> Crear Pasajero</a>
+        <table class="table">
+            <tr>
+                <td>ID Pasajero</td>
+                <td>Nombre</td>
+                <td>Asignar</td>
+            </tr>
+                {% for Pasajero in object_list %}
+                <tr>
+                    <th>{{ Pasajero.pk }}</th>
+                    <td>{{ Pasajero.nombre }}</td>
+                    <td>
+                        <a class="btn btn-primary" href='{% url "pasajero_assign" Pasajero.pk object_aeronave.pk %}'>Asignar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </body>
+</html>

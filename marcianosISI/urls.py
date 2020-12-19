@@ -33,6 +33,10 @@ urlpatterns = [
     path(r'pasajero/update(?P<pk>\d+)$', views.pasajero_update, name='pasajero_update'),
 
     path(r'aeronave/mostrar_pasajeros(?P<pk>\d+)$', views.mostrar_pasajeros, name='mostrar_pasajeros'),
-    path(r'aeronave/asignar_pasajeros(?P<pk>\d+)$', views.asignar_pasajeros, name='asignar_pasajeros'),
+    path(r'aeronave/pasajeros_sin_nave(?P<pk>\d+)$', views.pasajeros_sin_nave, name='pasajeros_sin_nave'),
+    path(r'aeronave/asignar_pasajeros(?P<pkP>\d+?P<pkA>\d+)$', views.asignar_pasajeros, name='pasajero_assign'),
+
+    path(r'error', views.error, name='error'),
+    path(r'exito', views.exito, name='exito'),
 
 ]
