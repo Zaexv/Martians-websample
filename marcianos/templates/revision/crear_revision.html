@@ -10,9 +10,13 @@
           <h1>Crear una Revisión</h1>
       <form  method="post">{% csrf_token %}
         {{ form.as_p }}
+        {% if error %}
+        {{ error }}
+        {% endif %}
         <input class="btn btn-primary" type="submit" value="Enviar" />
         <a class="btn btn-danger" href='{% url "revision_list" %}'>Cancelar</a>
       </form>
+
     </div>
   </body>
 </html>

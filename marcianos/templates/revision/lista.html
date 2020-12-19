@@ -12,16 +12,20 @@
         <table>
             <tr>
                 <td>ID Revisión</td>
+                <td>Aeronave</td>
                 <td>Nombre Revisor</td>
                 <td>Número de Pasajeros</td>
                 <td>Fecha de Revisión</td>
+                <td>Pasajeros</td>
             </tr>
                 {% for revision in object_list %}
                 <tr>
                     <td>{{ revision.pk }}</td>
+                    <td>{{ revision.aeronave_id.nombre }}</td>
                     <td>{{ revision.nombre_revisor }}</td>
                     <td>{{ revision.num_pasajeros }}</td>
                     <td>{{ revision.fecha_revision  }}</td>
+                    <td>{% for p in revision.pasajeros.all %}{{p.nombre}}  {% endfor %}</td>
                 </tr>
             {% endfor %}
         </table>

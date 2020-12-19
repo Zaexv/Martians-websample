@@ -156,6 +156,8 @@ def revision_create(request, template_name='revision/crear_revision.html'):
     form = RevisionForm(request.POST or None)
     if form.is_valid():
         aeronave_pk = form['aeronave_id'].value()
+        if (Revision.objects.filter(fecha_revision=form['fecha_revision'].value(), aeronave_id__pk = aeronave_pk).count()) > 0:
+                return render(request, template_name, {'form': form, 'error': 'Ya existe una revisión con esa fecha'})
         revision = Revision()
         revision.nombre_revisor = form['nombre_revisor'].value()
         revision.aeronave_id = aeronave.objects.get(pk=aeronave_pk)
@@ -163,6 +165,9 @@ def revision_create(request, template_name='revision/crear_revision.html'):
         revision.num_pasajeros = Pasajero.objects.filter(
                                     aeronave_id__pk=aeronave_pk
                                     ).count()
+        revision.save()
+        for p in Pasajero.objects.filter(aeronave_id__pk=aeronave_pk):
+            revision.pasajeros.add(p)
         revision.save()
         return redirect('revision_list')
     return render(request, template_name, {'form': form})
