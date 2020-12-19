@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <title>Revisiones</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Lista de todas las Revisiones</h1>
+        <a class="btn btn-success" href='{% url "revision_create" %}'> Crear Revisión</a>
+        <table>
+            <tr>
+                <td>ID Revisión</td>
+                <td>Nombre Revisor</td>
+                <td>Número de Pasajeros</td>
+                <td>Fecha de Revisión</td>
+            </tr>
+                {% for revision in object_list %}
+                <tr>
+                    <td>{{ revision.pk }}</td>
+                    <td>{{ revision.nombre_revisor }}</td>
+                    <td>{{ revision.num_pasajeros }}</td>
+                    <td>{{ revision.fecha_revision  }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <title>Crear Revisión</title>
+  </head>
+  <body>
+    <div class="container">
+          <h1>Crear una Revisión</h1>
+      <form  method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Enviar" />
+        <a class="btn btn-danger" href='{% url "revision_list" %}'>Cancelar</a>
+      </form>
+    </div>
+  </body>
+</html>
