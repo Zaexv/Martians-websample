@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.db.models import CheckConstraint, Q, F
 
+from django.urls import reverse
+from urllib.parse import urlencode
+
 from marcianos.models import nave_nodriza, aeronave, Pasajero
 
 # Naves Nodrizas
@@ -72,7 +75,7 @@ def asignar_pasajeros(request, pkP, pkA, template_name = 'pasajero/exito.html'):
     count_marcianos = Pasajero.objects.all().filter(aeronave_id=pkA).count()
     if count_marcianos >= aero.max_marcianos:
         # No se puede asignar.
-        return redirect('error')
+        return redirect('error', idError="1",pkP=pkP,pkA=pkA)
     else:
         pasajero.aeronave_id = aero
         pasajero.save()
@@ -144,8 +147,14 @@ def pasajero_update(request, pk, template_name='pasajero/crear_pasajero.html'):
     return render(request, template_name, {'form': form})
 
 
-def error(request, template_name='error.html'):
-    return render(request, template_name, {})
+def error(request, idError, pkP, pkA, template_name='error.html'):
+    pasajeros = Pasajero.objects.get(pk = pkP)
+    aero = aeronave.objects.get(pk = pkA)
+    data = {}
+    data['error_type'] = idError
+    data['pasajero'] = pasajeros
+    data['aeronave'] = aero
+    return render(request, template_name, data)
 
 def exito(request, template_name='exito.html'):
     return render(request, template_name, {})

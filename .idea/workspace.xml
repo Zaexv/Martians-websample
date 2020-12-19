@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[UPD]: Diseño vista pasajeros&#10;[ADD]: Boolean lleno para la aeronave">
-      <change afterPath="$PROJECT_DIR$/marcianos/templates/error.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marcianos/templates/exito.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marcianos/templates/pasajero/asignar.html" afterDir="false" />
+    <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[ADD]: Restriccion al asignar pasajeros a nave">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marcianos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marcianos/templates/aeronave/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/templates/aeronave/lista.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marcianos/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/templates/error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marcianos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/marcianosISI/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianosISI/urls.py" afterDir="false" />
     </list>
@@ -130,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608327641855</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="[ADD]: Restriccion al asignar pasajeros a nave">
+      <created>1608337302664</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1608337302664</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,6 +169,7 @@
     <MESSAGE value="[ADD]: Ver pasajeros de una Aeronave" />
     <MESSAGE value="[UPD]: Diseño Aeronave" />
     <MESSAGE value="[UPD]: Diseño vista pasajeros&#10;[ADD]: Boolean lleno para la aeronave" />
-    <option name="LAST_COMMIT_MESSAGE" value="[UPD]: Diseño vista pasajeros&#10;[ADD]: Boolean lleno para la aeronave" />
+    <MESSAGE value="[ADD]: Restriccion al asignar pasajeros a nave" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD]: Restriccion al asignar pasajeros a nave" />
   </component>
 </project>
