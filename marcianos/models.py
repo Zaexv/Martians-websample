@@ -17,7 +17,6 @@ class aeronave(models.Model):
         self.marcianos_count = pasajeros
         return pasajeros
 
-
 class Pasajero(models.Model):
     nombre = models.CharField(max_length=400)
     aeronave_id = models.ForeignKey(aeronave, on_delete=models.SET_NULL,
