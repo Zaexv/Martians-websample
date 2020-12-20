@@ -10,23 +10,38 @@
       {% include "home.html" %}
         <h1>Lista de todas las Revisiones</h1>
         <a class="btn btn-success" href='{% url "revision_create" %}'> Crear Revisión</a>
-        <table>
+        <table class="table">
             <tr>
-                <td>ID Revisión</td>
-                <td>Aeronave</td>
-                <td>Nombre Revisor</td>
-                <td>Número de Pasajeros</td>
-                <td>Fecha de Revisión</td>
-                <td>Pasajeros</td>
+                <th>ID Revisión</th>
+                <th>Aeronave</th>
+                <th>Nombre Revisor</th>
+                <th>Número de Pasajeros</th>
+                <th>Fecha de Revisión</th>
+                <td>
+                    <table class="table">
+                        <tr>Pasajeros</tr>
+                        <tr><th>ID</th>
+                        <td>Nombre</td></tr>
+                    </table>
+                </td>
             </tr>
                 {% for revision in object_list %}
                 <tr>
-                    <td>{{ revision.pk }}</td>
-                    <td>{{ revision.aeronave_id.nombre }}</td>
+                    <th>{{ revision.pk }}</th>
+                    <td>{{revision.aeronave_id.pk}}: {{ revision.aeronave_id.nombre }}</td>
                     <td>{{ revision.nombre_revisor }}</td>
                     <td>{{ revision.num_pasajeros }}</td>
                     <td>{{ revision.fecha_revision  }}</td>
-                    <td>{% for p in revision.pasajeros.all %}{{p.nombre}}  {% endfor %}</td>
+                    <td>
+                        <table class="table">
+                            {% for p in revision.pasajeros.all %}
+                                <tr>
+                                    <td>{{p.pk}}</td>
+                                    <td>{{p.nombre}}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
