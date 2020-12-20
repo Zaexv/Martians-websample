@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[ADD]: Ver pasajeros de una Aeronave">
+    <list default="true" id="11d2048c-ce5e-4de9-b332-20b8c5fd189a" name="Default Changelist" comment="[ADD]: Error detallado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marcianos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marcianos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marcianos/templates/aeronave/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/marcianos/templates/aeronave/lista.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +19,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="pasajeros" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,8 +40,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/marcianos/templates" />
-      <recent name="$PROJECT_DIR$/marcianos/templates/aeronave" />
       <recent name="$PROJECT_DIR$/marcianos/templates/pasajero" />
+      <recent name="$PROJECT_DIR$/marcianos/templates/aeronave" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -111,7 +109,35 @@
       <option name="project" value="LOCAL" />
       <updated>1607798258080</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="[UPD]: Diseño Aeronave">
+      <created>1608326749865</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1608326749865</updated>
+    </task>
+    <task id="LOCAL-00010" summary="[UPD]: Diseño vista pasajeros&#10;[ADD]: Boolean lleno para la aeronave">
+      <created>1608327641855</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608327641855</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[ADD]: Restriccion al asignar pasajeros a nave">
+      <created>1608337302664</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1608337302664</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[ADD]: Error detallado">
+      <created>1608339091520</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608339091520</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +172,10 @@
     <MESSAGE value="[ADD]: Update de pasajeros&#10;[UPD]: El aeronave_id en el create es opcional. Un paajero puede no tener aeronave." />
     <MESSAGE value="[UPD]: Los selectores de claves ajenas ahora tienen el nombre del objeto. no el ID (Tanto para Pasajeros como aeronaves)" />
     <MESSAGE value="[ADD]: Ver pasajeros de una Aeronave" />
-    <option name="LAST_COMMIT_MESSAGE" value="[ADD]: Ver pasajeros de una Aeronave" />
+    <MESSAGE value="[UPD]: Diseño Aeronave" />
+    <MESSAGE value="[UPD]: Diseño vista pasajeros&#10;[ADD]: Boolean lleno para la aeronave" />
+    <MESSAGE value="[ADD]: Restriccion al asignar pasajeros a nave" />
+    <MESSAGE value="[ADD]: Error detallado" />
+    <option name="LAST_COMMIT_MESSAGE" value="[ADD]: Error detallado" />
   </component>
 </project>

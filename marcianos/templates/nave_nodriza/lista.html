@@ -10,15 +10,26 @@
         {% include "home.html" %}
         <h1>Lista de todas las naves Nodrizas</h1>
         <a class="btn btn-success" href='{% url "naves_create" %}'> Crear nave nodriza</a>
-        <ul>
-          {% for Nave in object_list %}
-            <li>
-              <p>Nave PK: {{ Nave.pk }}</p>
-              <p>Nombre: {{ Nave.nombre }}</p>
-              <a class="btn btn-danger" href='{% url "naves_delete" Nave.pk %}'>borrar</a>
-            </li>
-          {% endfor %}
-        </ul>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Borrar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for Nave in object_list %}
+              <tr>
+                <th>{{ Nave.pk }}</th>
+                <td>{{ Nave.nombre }}</td>
+                <td><a class="btn btn-danger" href='{% url "naves_delete" Nave.pk %}'>Borrar</a> </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
     </div>
   </body>
 </html>
