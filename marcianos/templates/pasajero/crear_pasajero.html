@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <title>Crear Pasajeros</title>
+    <title>Crear/Editar Pasajero</title>
   </head>
   <body>
     <div class="container">
       {% include "home.html" %}
-          <h1>Crear un Pasajero</h1>
+          <h1>Crear/Editar un Pasajero</h1>
       <form  method="post">{% csrf_token %}
         {{ form.as_p }}
         <input class="btn btn-primary" type="submit" value="Enviar" />

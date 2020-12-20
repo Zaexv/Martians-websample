@@ -104,14 +104,10 @@ class PasajeroForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PasajeroForm, self).__init__(*args, **kwargs)
-        self.fields['aeronave_id'].queryset = aeronave.objects.all()
-        self.fields['aeronave_id'].label_from_instance = lambda obj: "%s" % (obj.nombre)
-
     class Meta:
         model = Pasajero
         fields = [
             'nombre',
-            'aeronave_id',
         ]
 
 
