@@ -39,4 +39,6 @@ urlpatterns = [
     path(r'error(?P<idError>\d+?P<pkP>\d+?P<pkA>\d+)$', views.error, name='error'),
     path(r'exito', views.exito, name='exito'),
 
+    path('revision/', views.revision_list, name='revision_list'),
+    path(r'revision/create$', views.revision_create, name='revision_create'),
 ]

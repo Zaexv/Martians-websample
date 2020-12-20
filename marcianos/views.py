@@ -2,10 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.db.models import CheckConstraint, Q, F
 
-from django.urls import reverse
-from urllib.parse import urlencode
-
-from marcianos.models import nave_nodriza, aeronave, Pasajero
+from marcianos.models import nave_nodriza, aeronave, Pasajero, Revision
 
 # Naves Nodrizas
 class nave_nodrizaForm(ModelForm):
@@ -146,7 +143,6 @@ def pasajero_update(request, pk, template_name='pasajero/crear_pasajero.html'):
         return redirect('pasajero_list')
     return render(request, template_name, {'form': form})
 
-
 def error(request, idError, pkP, pkA, template_name='error.html'):
     pasajeros = Pasajero.objects.get(pk = pkP)
     aero = aeronave.objects.get(pk = pkA)
@@ -158,3 +154,43 @@ def error(request, idError, pkP, pkA, template_name='error.html'):
 
 def exito(request, template_name='exito.html'):
     return render(request, template_name, {})
+
+#Revisiones
+class RevisionForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RevisionForm, self).__init__(*args, **kwargs)
+        self.fields['aeronave_id'].queryset = aeronave.objects.all()
+        self.fields['aeronave_id'].label_from_instance = lambda obj: "%s" % (obj.nombre)
+    class Meta:
+        model = Revision
+        fields = [
+            'nombre_revisor',
+            'aeronave_id',
+            'fecha_revision',
+        ]
+
+def revision_list(request, template_name = 'revision/lista.html'):
+    revisiones = Revision.objects.all()
+    data = {}
+    data['object_list'] = revisiones
+    return render(request, template_name, data)
+
+def revision_create(request, template_name='revision/crear_revision.html'):
+    form = RevisionForm(request.POST or None)
+    if form.is_valid():
+        aeronave_pk = form['aeronave_id'].value()
+        if (Revision.objects.filter(fecha_revision=form['fecha_revision'].value(), aeronave_id__pk = aeronave_pk).count()) > 0:
+                return render(request, template_name, {'form': form, 'error': 'Ya existe una revisión con esa fecha'})
+        revision = Revision()
+        revision.nombre_revisor = form['nombre_revisor'].value()
+        revision.aeronave_id = aeronave.objects.get(pk=aeronave_pk)
+        revision.fecha_revision = form['fecha_revision'].value()
+        revision.num_pasajeros = Pasajero.objects.filter(
+                                    aeronave_id__pk=aeronave_pk
+                                    ).count()
+        revision.save()
+        for p in Pasajero.objects.filter(aeronave_id__pk=aeronave_pk):
+            revision.pasajeros.add(p)
+        revision.save()
+        return redirect('revision_list')
+    return render(request, template_name, {'form': form})

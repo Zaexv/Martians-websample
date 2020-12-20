@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <title>Django CRUD application!</title>
+    <title>Crear Nave Nodriza</title>
   </head>
   <body>
     <div class="container">
-          <h1>Crear nueva nave nodriza</h1>
+      {% include "home.html" %}
+          <h1>Crear Nave Nodriza</h1>
       <form  method="post">{% csrf_token %}
         {{ form.as_p }}
         <input class="btn btn-primary" type="submit" value="Enviar" />
