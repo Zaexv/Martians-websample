@@ -8,13 +8,19 @@
   <body>
     <div class="container">
       <h1>Ha habido un error</h1>
-      {% if  error_type == "1" %}
+      {% if  error_type == "1" or error_type == "2" %}
       <h2>Al asociar el Pasajero: <span style="font-weight: bold;">{{ pasajero.nombre }}</span>, a la aeronave: <span style="color: blue; font-weight: bold;">{{ aeronave.nombre }}</span></h2>
       {% else %}
             <h2> No se especifica el error</h2>
       {% endif %}
       <hr>
-      <a class="btn btn-info" href='{% url "aeronaves_list" %}'>Lista de aeronaves</a>
+      {% if error_type == "1" %}
+        <a class="btn btn-info" href='{% url "aeronaves_list" %}'>Lista de aeronaves</a>
+      {% endif %}
+     {% if error_type == "2" %}
+        <a class="btn btn-info" href='{% url "pasajero_list" %}'>Lista de Pasajeros</a>
+      {% endif %}
+
     </div>
   </body>
 </html>

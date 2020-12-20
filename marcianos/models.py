@@ -25,7 +25,7 @@ class Pasajero(models.Model):
 class Revision(models.Model):
     nombre_revisor = models.CharField(max_length=400)
     aeronave_id = models.ForeignKey(aeronave, on_delete=models.CASCADE,
-        related_name = 'revisa_a', null=True, blank=True)
+        related_name = 'revisa_a')
     pasajeros = models.ManyToManyField(Pasajero)
     num_pasajeros = models.IntegerField()
     fecha_revision = models.DateField()

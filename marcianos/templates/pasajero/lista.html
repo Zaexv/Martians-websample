@@ -23,7 +23,12 @@
                     <td>{{ Pasajero.nombre }}</td>
                     <td>{{ Pasajero.aeronave_id.nombre }}</td>
                     <td>
-                        <a class="btn btn-primary" href='{% url "pasajero_bajar" Pasajero.pk %}'>Bajar</a>
+                        {% if Pasajero.aeronave_id == None %}
+                            <a class="btn btn-primary disabled" href='{% url "pasajero_bajar" Pasajero.pk %}'>Bajar</a>
+                        {% else %}
+                            <a class="btn btn-primary" href='{% url "pasajero_bajar" Pasajero.pk %}'>Bajar</a>
+                        {% endif %}
+
                         <a class="btn btn-primary" href='{% url "pasajero_update" Pasajero.pk %}'>Editar</a>
                         <a class="btn btn-danger" href='{% url "pasajero_delete" Pasajero.pk %}'>Borrar</a>
                     </td>
