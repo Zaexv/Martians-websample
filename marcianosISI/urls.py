@@ -31,6 +31,7 @@ urlpatterns = [
     path(r'pasajero/list', views.pasajero_list, name='pasajero_list'),
     path(r'pasajero/delete(?P<pk>\d+)$', views.pasajero_delete, name='pasajero_delete'),
     path(r'pasajero/update(?P<pk>\d+)$', views.pasajero_update, name='pasajero_update'),
+    path(r'pasajero/bajar(?P<pk>\d+)$', views.pasajero_bajar, name='pasajero_bajar'),
 
     path(r'aeronave/mostrar_pasajeros(?P<pk>\d+)$', views.mostrar_pasajeros, name='mostrar_pasajeros'),
     path(r'aeronave/pasajeros_sin_nave(?P<pk>\d+)$', views.pasajeros_sin_nave, name='pasajeros_sin_nave'),

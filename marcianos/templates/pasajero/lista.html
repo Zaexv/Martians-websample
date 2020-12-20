@@ -8,14 +8,14 @@
   <body>
     <div class="container">
       {% include "home.html" %}
-        <h1>Lista de todos los Pasajeros</h1>
+        <h1>Lista de Pasajeros</h1>
         <a class="btn btn-success" href='{% url "pasajero_create" %}'> Crear Pasajero</a>
         <table class="table">
             <tr>
                 <td>ID Pasajero</td>
                 <td>Nombre</td>
                 <td>A bordo de </td>
-                <td>Editar</td>
+                <td>Acciones</td>
             </tr>
                 {% for Pasajero in object_list %}
                 <tr>
@@ -23,6 +23,7 @@
                     <td>{{ Pasajero.nombre }}</td>
                     <td>{{ Pasajero.aeronave_id.nombre }}</td>
                     <td>
+                        <a class="btn btn-primary" href='{% url "pasajero_bajar" Pasajero.pk %}'>Bajar</a>
                         <a class="btn btn-primary" href='{% url "pasajero_update" Pasajero.pk %}'>Editar</a>
                         <a class="btn btn-danger" href='{% url "pasajero_delete" Pasajero.pk %}'>Borrar</a>
                     </td>

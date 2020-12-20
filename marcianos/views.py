@@ -139,6 +139,13 @@ def pasajero_update(request, pk, template_name='pasajero/crear_pasajero.html'):
         return redirect('pasajero_list')
     return render(request, template_name, {'form': form})
 
+def pasajero_bajar(request, pk):
+    pasajero = get_object_or_404(Pasajero, pk=pk)
+    aeronave_pk = pasajero.aeronave_id.pk
+    pasajero.aeronave_id = None
+    pasajero.save()
+    return mostrar_pasajeros(request, aeronave_pk)
+
 def error(request, idError, pkP, pkA, template_name='error.html'):
     pasajeros = Pasajero.objects.get(pk = pkP)
     aero = aeronave.objects.get(pk = pkA)
